@@ -83,18 +83,18 @@ app.use(helmet());
 app.use(morgan("common"));
 
 app.use('/specImage',express.static('Spec-Image'))
-app.use('/api/users',userRoute)
-app.use('/api/auth',authRoute)
-app.use('/api/posts',postRoute)
-app.use('/api/admin',adminRoute)
-app.use('/api/counselor',counselorRoute)
-app.use('/api/conversations',conversationRoute)
-app.use('/api/messages',messageRoute)
+app.use('/users',userRoute)
+app.use('/auth',authRoute)
+app.use('/posts',postRoute)
+app.use('/admin',adminRoute)
+app.use('/counselor',counselorRoute)
+app.use('/conversations',conversationRoute)
+app.use('/messages',messageRoute)
 
 
-app.get('/',(req,res)=>{
-    res.send("<h1>welcome to homepage</h1 >")
-})
+// app.get('/',(req,res)=>{
+//     res.send("<h1>welcome to homepage</h1 >")
+// })
 
 httpServer.listen(8080,() => {
     console.log("server is running on port 8080")
