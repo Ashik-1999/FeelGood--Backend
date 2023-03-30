@@ -86,10 +86,10 @@ mongoose.connect(process.env.MONGODB_URL,()=>{
 });
 
 
-app.use(cors({
-    origin:"https://main.d1u4ylaq20kul3.amplifyapp.com"
-  })
-);
+// app.use(cors({
+//     origin:"https://main.d1u4ylaq20kul3.amplifyapp.com"
+//   })
+// );
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
