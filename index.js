@@ -12,11 +12,11 @@ const adminRoute = require('./routes/admin')
 const counselorRoute = require('./routes/counselor')
 const messageRoute = require('./routes/messages')
 const conversationRoute = require('./routes/conversations')
+const { Server } = require('socket.io')
+const { createServer } = require('http')
 
 
 // Socket.io configuration
-const { createServer } = require('http')
-const { Server } = require('socket.io')
 const httpServer = createServer(app)
 
 const io = new Server(httpServer,{
@@ -72,9 +72,10 @@ io.on("connection",(socket)=>{
 
 
 dotenv.config()
-mongoose.connect('mongodb://localhost:27017/feelgood',()=>{
+mongoose.connect(process.env.MONGODB_URL,()=>{
     console.log("Connected to MongoDB")
 });
+
 
 app.use(cors())
 app.use(express.json());
@@ -95,6 +96,6 @@ app.get('/',(req,res)=>{
     res.send("<h1>welcome to homepage</h1 >")
 })
 
-app.listen(8080,()=>{
+httpServer.listen(8080,() => {
     console.log("server is running on port 8080")
 })
