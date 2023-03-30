@@ -100,6 +100,6 @@ app.use('/messages',messageRoute)
 //     res.send("<h1>welcome to homepage</h1 >")
 // })
 
-httpServer.listen(8080,() => {
+httpServer.listen(3000,() => {
     console.log("server is running on port 8080")
 })
