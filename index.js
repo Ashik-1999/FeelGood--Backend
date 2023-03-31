@@ -70,14 +70,14 @@ io.on("connection",(socket)=>{
 
 /* Socket.io configuration ends */
 
-app.use(cors({
-    origin: 'https://main.d1u4ylaq20kul3.amplifyapp.com',
-    methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
-    credentials: true,
-    preflightContinue: true,
-    optionsSuccessStatus: 204,
-    allowedHeaders: ['Content-Type', 'Authorization']
-  }))
+// app.use(cors({
+//     origin: 'https://main.d1u4ylaq20kul3.amplifyapp.com',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
+//     credentials: true,
+//     preflightContinue: true,
+//     optionsSuccessStatus: 204,
+//     allowedHeaders: ['Content-Type', 'Authorization']
+//   }))
 
 
 dotenv.config()
@@ -86,10 +86,7 @@ mongoose.connect(process.env.MONGODB_URL,()=>{
 });
 
 
-// app.use(cors({
-//     origin:"https://main.d1u4ylaq20kul3.amplifyapp.com"
-//   })
-// );
+app.use(cors());
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -109,6 +106,6 @@ app.use('/messages',messageRoute)
 //     res.send("<h1>welcome to homepage</h1 >")
 // })
 
-app.listen(3000,() => {
+httpServer.listen(3000,() => {
     console.log("server is running on port 3000")
 })
