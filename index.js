@@ -12,63 +12,63 @@ const adminRoute = require('./routes/admin')
 const counselorRoute = require('./routes/counselor')
 const messageRoute = require('./routes/messages')
 const conversationRoute = require('./routes/conversations')
-// const { Server } = require('socket.io')
-// const { createServer } = require('http')
+const { Server } = require('socket.io')
+const { createServer } = require('http')
 
 
-// Socket.io configuration
-// const httpServer = createServer(app)
+/* Socket.io configuration  */
+const httpServer = createServer(app)
 
-// const io = new Server(httpServer,{
-//     cors:{
-//         origin:"https://main.d1u4ylaq20kul3.amplifyapp.com"
-//     }
-// });
+const io = new Server(httpServer,{
+    cors:{
+        origin:"https://main.d1u4ylaq20kul3.amplifyapp.com"
+    }
+});
 
-// let users = [];
+let users = [];
 
-// const addUser = (userId,socketId) =>{
-//     !users.some(user =>user.userId === userId) && 
-//     users.push({userId,socketId})
-// }
+const addUser = (userId,socketId) =>{
+    !users.some(user =>user.userId === userId) && 
+    users.push({userId,socketId})
+}
 
-// const removeUser = (socketId) =>{
-//     users = users.filter((user)=>user.socketId !== socketId)
-// }
+const removeUser = (socketId) =>{
+    users = users.filter((user)=>user.socketId !== socketId)
+}
 
-// const getUser = (userId) =>{
-//     return users.find((user=>user.userId === userId))
-// }
+const getUser = (userId) =>{
+    return users.find((user=>user.userId === userId))
+}
 
-// io.on("connection",(socket)=>{
-//     // when connect
-//     console.log("a user connected")  
+io.on("connection",(socket)=>{
+    // when connect
+    console.log("a user connected")  
 
-//     //take userid and socketid from user
-//     socket.on("addUser",id =>{
-//         addUser(id,socket.id)
-//         io.emit("getUsers",users)  
-//     })
+    //take userid and socketid from user
+    socket.on("addUser",id =>{
+        addUser(id,socket.id)
+        io.emit("getUsers",users)  
+    })
 
-//     //send and get message
-//     socket.on("sendMessage",({senderId,receiverId,text}) =>{
-//         console.log(senderId,receiverId,text)
+    //send and get message
+    socket.on("sendMessage",({senderId,receiverId,text}) =>{
+        console.log(senderId,receiverId,text)
 
-//         const user = getUser(receiverId);
+        const user = getUser(receiverId);
 
-//         io.to(user?.socketId).emit("getMessage",{ 
-//             senderId,text
-//         })
-//     })
+        io.to(user?.socketId).emit("getMessage",{ 
+            senderId,text
+        })
+    })
 
-//     //when disconnect
-//     socket.on("disconnect",()=> {
-//         console.log("a user disconnected")
-//         removeUser(socket.id)
-//     })
-// })
+    //when disconnect
+    socket.on("disconnect",()=> {
+        console.log("a user disconnected")
+        removeUser(socket.id)
+    })
+})
 
-// socket io configuration ends
+/* Socket.io configuration ends */
 
 app.use(cors({
     origin: 'https://main.d1u4ylaq20kul3.amplifyapp.com',
