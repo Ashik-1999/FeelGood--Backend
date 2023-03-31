@@ -12,8 +12,8 @@ const adminRoute = require('./routes/admin')
 const counselorRoute = require('./routes/counselor')
 const messageRoute = require('./routes/messages')
 const conversationRoute = require('./routes/conversations')
-const { Server } = require('socket.io')
-const { createServer } = require('http')
+// const { Server } = require('socket.io')
+// const { createServer } = require('http')
 
 
 // Socket.io configuration
@@ -71,7 +71,7 @@ const { createServer } = require('http')
 // socket io configuration ends
 
 app.use(cors({
-    origin: 'https://main.d1u4ylaq20kul3.amplifyapp.com/',
+    origin: 'https://main.d1u4ylaq20kul3.amplifyapp.com',
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
     credentials: true,
     preflightContinue: true,
@@ -110,5 +110,5 @@ app.use('/messages',messageRoute)
 // })
 
 app.listen(3000,() => {
-    console.log("server is running on port 8080")
+    console.log("server is running on port 3000")
 })
